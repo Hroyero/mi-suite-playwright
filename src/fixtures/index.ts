@@ -2,6 +2,7 @@ import { test as base, expect, Page } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { ProductPage } from '../pages/ProductsPage';
 import { CartPage } from '../pages/CartPage';
+import { USERS } from '../data/users';
 
 // Define los tipos de todas tus fixtures
 type AppFixtures = {
@@ -15,7 +16,7 @@ export const test = base.extend<AppFixtures>({
   loggedInPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(USERS.standard.username, USERS.standard.password);
     await use(page);
   },
 
