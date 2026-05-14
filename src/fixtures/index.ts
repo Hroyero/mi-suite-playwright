@@ -8,6 +8,8 @@ import { USERS } from '../data/users';
 type AppFixtures = {
   loggedInPage: Page;
   pageWithCart: Page;
+  loggedLockedInPage: Page;
+
 };
 
 export const test = base.extend<AppFixtures>({
@@ -34,7 +36,6 @@ export const test = base.extend<AppFixtures>({
 
     await use(page);
   },
-
 });
 
 // Exporta expect también para usarlo en los tests
