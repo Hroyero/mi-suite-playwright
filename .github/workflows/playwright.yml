@@ -10,37 +10,45 @@ on:
 jobs:
   test:
     name: Run Playwright Tests
-    runs-on: ubuntu-latest    # máquina virtual de GitHub
+    runs-on: ubuntu-22.04     # ubuntu 22 — más estable para Playwright
 
     steps:
-      # 1. Descargar el código
+      # 1. Descargar el código del repositorio
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Instalar Node.js
+      # 2. Instalar Node.js versión 20
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'          # cachea node_modules para ir más rápido
 
-      # 3. Instalar dependencias
+      # 3. Instalar dependencias del proyecto
+      #    npm ci es más estricto que npm install — ideal para CI
+      #    lee el package-lock.json y no permite cambios inesperados
       - name: Install dependencies
-        run: npm ci             # más estricto que npm install — ideal para CI
+        run: npm ci
 
-      # 4. Instalar browsers de Playwright
+      # 4. Instalar browsers de Playwright con sus dependencias del sistema
+      #    --with-deps instala las librerías de Linux que necesitan los browsers
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium firefox
+        run: npx playwright install chromium firefox --with-deps
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 0
 
-      # 5. Correr los tests
+      # 5. Correr todos los tests de Playwright
+      #    Si algún test falla, este paso falla y el pipeline se marca en rojo
       - name: Run Playwright tests
         run: npx playwright test
 
-      # 6. Subir el reporte — siempre, aunque fallen los tests
+      # 6. Subir el reporte HTML como artifact descargable
+      #    if: always() — sube el reporte AUNQUE los tests fallen
+      #    sin esto, si fallan los tests no habría reporte para ver qué pasó
       - name: Upload test report
         uses: actions/upload-artifact@v4
-        if: always()            # ← clave — sube el reporte aunque haya fallos
+        if: always()
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 30    # el reporte se guarda 30 días en GitHub
