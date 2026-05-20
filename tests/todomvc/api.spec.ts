@@ -30,7 +30,7 @@ test.describe('API Test - JSONPlaceholder', () =>{
 
         const body = await response.json();
         expect(body.id).toBe(1);
-        expect(body.name).toBe('Hollmans R');
+        expect(body.name).toBe('Leanne Graham');
         expect(body.email).toBeDefined();
     });
 
