@@ -1,9 +1,9 @@
 // saucedemo.spec.ts
-import { test, expect } from '../src/fixtures/index';
-import { ProductPage } from '../src/pages/ProductsPage';
-import { CartPage } from '../src/pages/CartPage';
-import { LoginPage } from '../src/pages/LoginPage';  // ← usa LoginPage normal
-import { USERS } from '../src/data/users';
+import { test, expect } from '../../src/fixtures/index';
+import { ProductPage } from '../../src/pages/ProductsPage';
+import { CartPage } from '../../src/pages/CartPage';
+import { LoginPage } from '../../src/pages/LoginPage';  // ← usa LoginPage normal
+import { USERS } from '../../src/data/users';
 
 test.describe('SauceDemo con Fixtures', () => {
 

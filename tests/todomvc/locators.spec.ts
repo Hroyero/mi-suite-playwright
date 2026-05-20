@@ -9,7 +9,8 @@ test.describe('Locators - TodoMVC', () => {
   test('agregar tarea con getByRole', async ({ page }) => {
     await page.getByRole('textbox').fill('Mi tarea con getByRole');
     await page.getByRole('textbox').press('Enter');
-    await expect(page.getByTestId('todo-item'))
+    // ✅ Cambiado a locator directo
+    await expect(page.locator('[data-testid="todo-item"]'))
       .toHaveText('Mi tarea con getByRole');
   });
 

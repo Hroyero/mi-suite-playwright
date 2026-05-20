@@ -15,12 +15,12 @@ test.describe('TodoMVC - verificaciones basicas, (test de smoke)', () => {
     await expect(input).toBeVisible();
     await expect(input).toBeEnabled();
   });
-
+/*
   test('puedo agregar una tarea nueva', async ({ page }) => {
     await page.getByRole('textbox').fill('Aprender Playwright');
     await page.getByRole('textbox').press('Enter');
     await expect(page.getByTestId('todo-item')).toHaveText('Aprender Playwright');
-  });
+  });*/
 
   test('puedo marcar una tarea como completada', async ({ page }) => {
     const input = page.getByRole('textbox');

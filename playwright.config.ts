@@ -16,21 +16,25 @@ export default defineConfig({
   ],
 
   use: {
-    testIdAttribute: 'data-test',
-    trace: 'on-first-retry',     // graba trace si un test falla y reintenta
-    screenshot: 'only-on-failure', // screenshot automático si falla
-    video: 'retain-on-failure',  // video si falla
+    // testIdAttribute: 'data-test',  ← quitar de aquí
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   projects: [
     {
       name: 'chromium',
+      testMatch: '**/todomvc/**',
       use: { ...devices['Desktop Chrome'] },
-    }
-    /*
+    },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    }*/
+      name: 'saucedemo',
+      testMatch: '**/saucedemo/**',
+      use: {
+        ...devices['Desktop Chrome'],
+        testIdAttribute: 'data-test',
+      },
+    },
   ],
 });
