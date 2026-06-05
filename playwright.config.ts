@@ -3,6 +3,9 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
 
+    // Cada test corre en paralelo dentro del mismo archivo
+    fullyParallel: true,
+    
   // En CI reintenta una vez si falla — reduce falsos negativos
   retries: process.env.CI ? 1 : 0,
 
