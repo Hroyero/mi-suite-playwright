@@ -5,7 +5,7 @@ export default defineConfig({
 
     // Cada test corre en paralelo dentro del mismo archivo
     fullyParallel: true,
-    
+
   // En CI reintenta una vez si falla — reduce falsos negativos
   retries: process.env.CI ? 1 : 0,
 
@@ -39,5 +39,11 @@ export default defineConfig({
         testIdAttribute: 'data-test',
       },
     },
+    // Mobile
+  {
+    name: 'mobile',
+    testMatch: '**/todomvc/**',
+    use: { ...devices['Pixel 5'] },
+  },
   ],
 });

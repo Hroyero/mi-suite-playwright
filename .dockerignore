@@ -1,0 +1,8 @@
+# Crear .dockerignore con contenido
+cat > .dockerignore << 'EOF'
+node_modules
+playwright-report
+test-results
+.git
+.github
+EOF

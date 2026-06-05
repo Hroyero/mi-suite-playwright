@@ -12,6 +12,11 @@ jobs:
     name: Run Playwright Tests
     runs-on: ubuntu-22.04     # ubuntu 22 — más estable para Playwright
 
+
+    # Esto le dice a GitHub Actions que use la imagen oficial de Playwright
+    container:
+      image: mcr.microsoft.com/playwright:v1.38.0-jammy
+
     steps:
       # 1. Descargar el código del repositorio
       - name: Checkout code
@@ -30,17 +35,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4. Instalar browsers de Playwright con sus dependencias del sistema
-      #    --with-deps instala las librerías de Linux que necesitan los browsers
-      - name: Install Playwright browsers
-        run: npx playwright install chromium firefox --with-deps
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 0
-
-      # 5. Correr todos los tests de Playwright
-      #    Si algún test falla, este paso falla y el pipeline se marca en rojo
+      # No necesitas instalar browsers — ya vienen en la imagen
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          HOME: /root
 
       # 6. Subir el reporte HTML como artifact descargable
       #    if: always() — sube el reporte AUNQUE los tests fallen
