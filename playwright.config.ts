@@ -45,5 +45,12 @@ export default defineConfig({
     testMatch: '**/todomvc/**',
     use: { ...devices['Pixel 5'] },
   },
+
+    // API tests — sin browser
+    {
+      name: 'api',
+      testMatch: '**/api/**',
+      use: {},
+    },
   ],
 });

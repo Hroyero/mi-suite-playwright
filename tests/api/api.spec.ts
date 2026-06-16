@@ -10,7 +10,6 @@ test.describe('API Test - JSONPlaceholder', () =>{
         expect(response.status()).toBe(200);
 
         const body = await response.json();
-        console.log(body);
         expect(body.length).toBeGreaterThan(0);
 
         //Check first user structure
